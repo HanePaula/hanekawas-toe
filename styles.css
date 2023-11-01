@@ -64,9 +64,13 @@ main {
     border: 12px solid var(--preto);
     background: var(--fundo-bloco);
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.bloco:hover {
+[data-cheio="não"]:hover {
     background: var(--navbar);
 }
 
@@ -112,6 +116,11 @@ main {
 .jogador-mugshot {
     width: 40px;
     height: 40px;
+}
+
+.bloco-ponto {
+    height: 100px;
+    width: 100px;
 }
 
 [data-vez="sim"] {
