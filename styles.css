@@ -8,3 +8,63 @@
     --preto: #000;
     --fonte-principal: 'Inter';
 }
+
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: var(--navbar);
+}
+
+.navbar-icone {
+    display: flex;
+    align-items: flex-end;
+    margin-left: 4.4rem;
+    gap: 0.5rem
+}
+
+.icone-imagem {
+    width: 70px;
+    height: 70px;
+}
+
+.icone-texto {
+    font-size: 25px;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    padding: 5rem 0 5rem;
+}
+
+.tabuleiro {
+    width: 500px;
+    height: 500px;
+    border-radius: 50px;
+    border: 20px solid var(--preto);
+    background: var(--fundo-jogo);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.linha {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.bloco {
+    width: 127px;
+    height: 127px;
+    border-radius: 20px;
+    border: 12px solid var(--preto);
+    background: var(--fundo-bloco);
+    cursor: pointer;
+}
+
+.bloco:hover {
+    background: var(--navbar);
+}
+
