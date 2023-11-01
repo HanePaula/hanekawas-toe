@@ -70,7 +70,7 @@ main {
     align-items: center;
 }
 
-[data-cheio="não"]:hover {
+[data-cheio=""]:hover {
     background: var(--navbar);
 }
 
