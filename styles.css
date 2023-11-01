@@ -7,6 +7,7 @@
     --fundo-bloco: #F73F39;
     --preto: #000;
     --fonte-principal: 'Inter';
+    --amarelo-mensagem: #DBDE4E;
 }
 
 .navbar {
@@ -67,6 +68,53 @@ main {
 
 .bloco:hover {
     background: var(--navbar);
+}
+
+.div-placar {
+    margin-left: 7rem;
+}
+
+.placar {
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+}
+
+.jogador {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.jogador-info {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.jogador-numero {
+    font-size: 30px;
+}
+
+.mensagem-turno {
+    background-color: var(--amarelo-mensagem);
+    padding: 0.2rem 0.5rem 0.2rem;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.numero-vitorias {
+    font-size: 50px;
+}
+
+[data-vez="sim"] {
+    display: block;
+}
+
+[data-vez="não"] {
+    display: none;
 }
 
 @media screen and (max-width: 768px) {
