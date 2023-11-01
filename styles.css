@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+    --navbar: #C3120C;
+    --fundo: #591715;
+    --fundo-jogo: #fff;
+    --fundo-bloco: #F73F39;
+    --preto: #000;
+    --fonte-principal: 'Inter';
+}
