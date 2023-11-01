@@ -34,6 +34,7 @@
 main {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding: 5rem 0 5rem;
 }
 
@@ -66,5 +67,25 @@ main {
 
 .bloco:hover {
     background: var(--navbar);
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-icone {
+        margin-left : 1rem;
+    }
+
+    .tabuleiro {
+        width: 15.625rem;
+        height: 15.625rem;
+        border-radius: 25px;
+        border: 10px solid var(--preto);
+    }
+
+    .bloco {
+        width: 3.5rem;
+        height: 3.5rem;
+        border-radius: 10px;
+        border: 6px solid var(--preto);
+    }
 }
 
