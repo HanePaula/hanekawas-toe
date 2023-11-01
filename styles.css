@@ -149,5 +149,31 @@ main {
         border-radius: 10px;
         border: 6px solid var(--preto);
     }
+
+    .div-placar {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    .jogador-numero {
+        font-size: 16px;
+    }
+
+    .numero-vitorias {
+        font-size: 20px;
+    }
+
+    main {
+        flex-direction: column;
+    }
+
+    .placar {
+        gap: 2rem;
+    }
+
+    .bloco-ponto {
+        width: 50px;
+        height: 50px;
+    }
 }
 
