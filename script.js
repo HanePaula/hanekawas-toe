@@ -10,21 +10,43 @@ const vitorias2 = document.getElementById('vitorias-2');
 const musica = document.getElementById('musica');
 const botaoJogar = document.getElementById('jogar');
 const apresentacao = document.getElementById('apresentacao');
-const somX = new Audio ('assets/xTone.mp3');
-const somO = new Audio ('assets/OTone.mp3');
+const somX = new Audio('assets/xTone.mp3');
+const somO = new Audio('assets/OTone.mp3');
+const botaoSom = document.getElementById('botao-som');
+const iconeSom = document.querySelector('[data-som]');
+let somLigado = true;
+
+console.log(botaoSom);
+console.log(iconeSom);
+
+botaoSom.addEventListener('click', () => {
+    if (somLigado === true) {
+        somLigado = false;
+        iconeSom.dataset.som = 'não';
+        musica.pause();
+    }
+
+    else {
+        somLigado = true;
+        iconeSom.dataset.som = 'sim';
+        musica.play();
+    }
+})
 
 botaoJogar.addEventListener('click', () => {
-    musica.play();
-    musica.loop = true;
-    botaoJogar.style.display = 'none';
-    overlay.style.display = 'none';
-    apresentacao.style.display = 'none';
+    if (somLigado === true) {
+        musica.play();
+        musica.loop = true;
+        botaoJogar.style.display = 'none';
+        overlay.style.display = 'none';
+        apresentacao.style.display = 'none';
+    }
 })
 
 let jogoVencidoX = false;
 let jogoVencidoO = false;
 
-let placarX  = 0;
+let placarX = 0;
 let placarO = 0;
 
 let blocosCheios = 0;
@@ -66,7 +88,9 @@ function fazJogada() {
                         bloco.dataset.cheio = 'X';
                         turno[0].dataset.vez = 'não';
                         turno[1].dataset.vez = 'sim';
-                        somX.play();
+                        if (somLigado === true) {
+                            somX.play();
+                        }
                         blocosCheios++;
                         verificaTabuleiro();
 
@@ -80,7 +104,11 @@ function fazJogada() {
                         bloco.dataset.cheio = 'O';
                         turno[0].dataset.vez = 'sim';
                         turno[1].dataset.vez = 'não';
-                        somO.play();
+
+                        if (somLigado === true) {
+                            somO.play();
+                        }
+
                         blocosCheios++;
                         verificaTabuleiro();
 
@@ -153,16 +181,16 @@ function verificaTabuleiro() {
     }
 
     if (tabuleiro[0][0].dataset.cheio === 'X' &&
-    tabuleiro[1][1].dataset.cheio === 'X' &&
-    tabuleiro[2][2].dataset.cheio === 'X') {
-    jogoVencidoX = true;
-}
+        tabuleiro[1][1].dataset.cheio === 'X' &&
+        tabuleiro[2][2].dataset.cheio === 'X') {
+        jogoVencidoX = true;
+    }
 
-if ((tabuleiro[0][2].dataset.cheio === 'X') &&
-    tabuleiro[0][2].dataset.cheio === tabuleiro[1][1].dataset.cheio &&
-    tabuleiro[1][1].dataset.cheio === tabuleiro[2][0].dataset.cheio) {
-    jogoVencidoX = true;
-}
+    if ((tabuleiro[0][2].dataset.cheio === 'X') &&
+        tabuleiro[0][2].dataset.cheio === tabuleiro[1][1].dataset.cheio &&
+        tabuleiro[1][1].dataset.cheio === tabuleiro[2][0].dataset.cheio) {
+        jogoVencidoX = true;
+    }
 
 
     if (jogoVencidoX === true) {
@@ -228,7 +256,7 @@ function jogaNovamente() {
         if (jogoVencidoX) {
             placarX++;
         }
-        
+
         else if (jogoVencidoO) {
             placarO++;
         }
@@ -243,7 +271,10 @@ function jogaNovamente() {
         turno[0].dataset.vez = 'sim';
         turno[1].dataset.vez = 'não';
 
-        musica.play();
+        if (somLigado === true) {
+            musica.play();
+        }
+
     })
 }
 
