@@ -143,7 +143,7 @@ main {
     justify-content: center;
     align-items: center;
     z-index: 999; /* Certifique-se de que o overlay esteja acima do conteúdo abaixo */
-    display: none;
+    display: block;
 }
 
 /* Estilo para a tela de vitória no meio do tabuleiro */
@@ -178,6 +178,9 @@ main {
     display: none;
 }
 
+#jogar {
+    display: block;
+}
 
 
 @media screen and (max-width: 768px) {

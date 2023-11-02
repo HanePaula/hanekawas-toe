@@ -7,6 +7,18 @@ const overlay = document.getElementById('overlay');
 const jogarNovamente = document.getElementById('jogar-novamente');
 const vitorias1 = document.getElementById('vitorias-1');
 const vitorias2 = document.getElementById('vitorias-2');
+const musica = document.getElementById('musica');
+const botaoJogar = document.getElementById('jogar');
+const apresentacao = document.getElementById('apresentacao');
+const somX = new Audio ('assets/xTone.mp3');
+const somO = new Audio ('assets/OTone.mp3');
+
+botaoJogar.addEventListener('click', () => {
+    musica.play();
+    botaoJogar.style.display = 'none';
+    overlay.style.display = 'none';
+    apresentacao.style.display = 'none';
+})
 
 let jogoVencidoX = false;
 let jogoVencidoO = false;
@@ -37,17 +49,23 @@ function fazJogada() {
     if (jogoVencidoO === false && jogoVencidoX === false) {
         tabuleiro.forEach((linha) => {
             linha.forEach((bloco) => {
+
                 bloco.addEventListener('click', () => {
 
                     if (jogoVencidoO == true || jogoVencidoX == true) {
                         return;
                     }
 
-                    if (turno[0].dataset.vez === 'sim') {
+                    if (bloco.dataset.cheio !== '') {
+                        bloco.removeEventListener('click', () => { });
+                    }
+
+                    else if (turno[0].dataset.vez === 'sim') {
                         bloco.innerHTML = `<img class="bloco-ponto" src="assets/hanekawa-x.webp" alt="Marcação de Ponto da Hanekawa">`
                         bloco.dataset.cheio = 'X';
                         turno[0].dataset.vez = 'não';
                         turno[1].dataset.vez = 'sim';
+                        somX.play();
                         blocosCheios++;
                         verificaTabuleiro();
 
@@ -61,6 +79,7 @@ function fazJogada() {
                         bloco.dataset.cheio = 'O';
                         turno[0].dataset.vez = 'sim';
                         turno[1].dataset.vez = 'não';
+                        somO.play();
                         blocosCheios++;
                         verificaTabuleiro();
 
@@ -154,6 +173,9 @@ if ((tabuleiro[0][2].dataset.cheio === 'X') &&
 
         overlay.style.display = 'block';
         jogarNovamente.style.display = 'block';
+
+        musica.pause();
+        musica.currentTime = 0;
     }
 
     else if (jogoVencidoO === true) {
@@ -165,6 +187,9 @@ if ((tabuleiro[0][2].dataset.cheio === 'X') &&
 
         overlay.style.display = 'block';
         jogarNovamente.style.display = 'block';
+
+        musica.pause();
+        musica.currentTime = 0;
     }
 
     else if (blocosCheios >= 9) {
@@ -176,6 +201,9 @@ if ((tabuleiro[0][2].dataset.cheio === 'X') &&
 
         overlay.style.display = 'block';
         jogarNovamente.style.display = 'block';
+
+        musica.pause();
+        musica.currentTime = 0;
     }
 }
 
@@ -213,6 +241,8 @@ function jogaNovamente() {
 
         turno[0].dataset.vez = 'sim';
         turno[1].dataset.vez = 'não';
+
+        musica.play();
     })
 }
 
