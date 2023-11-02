@@ -2,7 +2,19 @@ const linha1 = document.getElementById('linha1');
 const linha2 = document.getElementById('linha2');
 const linha3 = document.getElementById('linha3');
 const turno = document.querySelectorAll('[data-vez]');
-let jogoVencido = false;
+const main = document.querySelector('main');
+const overlay = document.getElementById('overlay');
+const jogarNovamente = document.getElementById('jogar-novamente');
+const vitorias1 = document.getElementById('vitorias-1');
+const vitorias2 = document.getElementById('vitorias-2');
+
+let jogoVencidoX = false;
+let jogoVencidoO = false;
+
+let placarX  = 0;
+let placarO = 0;
+
+let blocosCheios = 0;
 
 let tabuleiro = [
     [linha1.children[0], linha1.children[1], linha1.children[2]],
@@ -22,12 +34,12 @@ function removeEventListeners() {
 }
 
 function fazJogada() {
-    if (jogoVencido === false) {
+    if (jogoVencidoO === false && jogoVencidoX === false) {
         tabuleiro.forEach((linha) => {
             linha.forEach((bloco) => {
                 bloco.addEventListener('click', () => {
 
-                    if (jogoVencido) {
+                    if (jogoVencidoO == true || jogoVencidoX == true) {
                         return;
                     }
 
@@ -36,9 +48,10 @@ function fazJogada() {
                         bloco.dataset.cheio = 'X';
                         turno[0].dataset.vez = 'não';
                         turno[1].dataset.vez = 'sim';
+                        blocosCheios++;
                         verificaTabuleiro();
 
-                        if (jogoVencido) {
+                        if (jogoVencidoO == true || jogoVencidoX == true) {
                             removeEventListeners();
                         }
                     }
@@ -48,9 +61,10 @@ function fazJogada() {
                         bloco.dataset.cheio = 'O';
                         turno[0].dataset.vez = 'sim';
                         turno[1].dataset.vez = 'não';
+                        blocosCheios++;
                         verificaTabuleiro();
 
-                        if (jogoVencido) {
+                        if (jogoVencidoO == true || jogoVencidoX == true) {
                             removeEventListeners();
                         }
                     }
@@ -74,8 +88,12 @@ function verificaTabuleiro() {
             }
         }
 
-        if (checkO >= 3 || checkX >= 3) {
-            jogoVencido = true;
+        if (checkO >= 3) {
+            jogoVencidoO = true;
+        }
+
+        else if (checkX >= 3) {
+            jogoVencidoX = true;
         }
     }
 
@@ -93,28 +111,111 @@ function verificaTabuleiro() {
             }
         }
 
-        if (checkO >= 3 || checkX >= 3) {
-            jogoVencido = true;
+        if (checkO >= 3) {
+            jogoVencidoO = true;
+        }
+
+        else if (checkX >= 3) {
+            jogoVencidoX = true;
         }
     }
 
-    if ((tabuleiro[0][0].dataset.cheio === 'O' || tabuleiro[0][0].dataset.cheio === 'X') &&
-        (tabuleiro[1][1].dataset.cheio === 'O' || tabuleiro[1][1].dataset.cheio === 'X') &&
-        (tabuleiro[2][2].dataset.cheio === 'O' || tabuleiro[2][2].dataset.cheio === 'X')) {
-        jogoVencido = true;
+    if (tabuleiro[0][0].dataset.cheio === 'O' &&
+        tabuleiro[1][1].dataset.cheio === 'O' &&
+        tabuleiro[2][2].dataset.cheio === 'O') {
+        jogoVencidoO = true;
     }
 
-    if ((tabuleiro[0][2].dataset.cheio === 'O' || tabuleiro[0][2].dataset.cheio === 'X') &&
+    if ((tabuleiro[0][2].dataset.cheio === 'O') &&
         tabuleiro[0][2].dataset.cheio === tabuleiro[1][1].dataset.cheio &&
         tabuleiro[1][1].dataset.cheio === tabuleiro[2][0].dataset.cheio) {
-        jogoVencido = true;
+        jogoVencidoO = true;
     }
 
+    if (tabuleiro[0][0].dataset.cheio === 'X' &&
+    tabuleiro[1][1].dataset.cheio === 'X' &&
+    tabuleiro[2][2].dataset.cheio === 'X') {
+    jogoVencidoX = true;
+}
 
-    if (jogoVencido === true) {
-        console.log('Parabéns, você venceu!');
+if ((tabuleiro[0][2].dataset.cheio === 'X') &&
+    tabuleiro[0][2].dataset.cheio === tabuleiro[1][1].dataset.cheio &&
+    tabuleiro[1][1].dataset.cheio === tabuleiro[2][0].dataset.cheio) {
+    jogoVencidoX = true;
+}
+
+
+    if (jogoVencidoX === true) {
+        const telaDeVitoria = document.createElement('div');
+        telaDeVitoria.className = "tela-de-vitoria";
+        telaDeVitoria.innerHTML = 'PLAYER 1 WINS!';
+
+        main.appendChild(telaDeVitoria);
+
+        overlay.style.display = 'block';
+        jogarNovamente.style.display = 'block';
+    }
+
+    else if (jogoVencidoO === true) {
+        const telaDeVitoria = document.createElement('div');
+        telaDeVitoria.className = "tela-de-vitoria";
+        telaDeVitoria.innerHTML = 'PLAYER 2 WINS!';
+
+        main.appendChild(telaDeVitoria);
+
+        overlay.style.display = 'block';
+        jogarNovamente.style.display = 'block';
+    }
+
+    else if (blocosCheios >= 9) {
+        const telaDeVitoria = document.createElement('div');
+        telaDeVitoria.className = "tela-de-vitoria";
+        telaDeVitoria.innerHTML = 'DRAW!';
+
+        main.appendChild(telaDeVitoria);
+
+        overlay.style.display = 'block';
+        jogarNovamente.style.display = 'block';
     }
 }
 
+function jogaNovamente() {
+    jogarNovamente.addEventListener('click', () => {
+        overlay.style.display = 'none';
+        jogarNovamente.style.display = 'none';
+
+        main.removeChild(main.lastChild);
+
+        tabuleiro.forEach((linha) => {
+            linha.forEach((bloco) => {
+                bloco.dataset.cheio = '';
+
+                while (bloco.firstChild) {
+                    bloco.removeChild(bloco.firstChild);
+                }
+            })
+        })
+
+        if (jogoVencidoX) {
+            placarX++;
+        }
+        
+        else if (jogoVencidoO) {
+            placarO++;
+        }
+
+        vitorias1.innerText = placarX.toString();
+        vitorias2.innerText = placarO.toString();
+
+        jogoVencidoO = false;
+        jogoVencidoX = false;
+        blocosCheios = 0;
+
+        turno[0].dataset.vez = 'sim';
+        turno[1].dataset.vez = 'não';
+    })
+}
+
 fazJogada();
+jogaNovamente();
 

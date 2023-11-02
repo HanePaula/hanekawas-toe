@@ -131,6 +131,55 @@ main {
     display: none;
 }
 
+/* Estilo para o overlay que cobre o tabuleiro */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--preto);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Certifique-se de que o overlay esteja acima do conteúdo abaixo */
+    display: none;
+}
+
+/* Estilo para a tela de vitória no meio do tabuleiro */
+.tela-de-vitoria {
+    background-color: #fff;
+    color: var(--navbar);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24px;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Deve estar acima do overlay */
+}
+
+/* Estilo para o botão "Jogar Novamente" abaixo da tela de vitória */
+.jogar-novamente {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%; /* Ajuste essa porcentagem para a posição vertical desejada */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1001; /* Deve estar acima da tela de vitória e do overlay */
+    display: none;
+}
+
+
+
 @media screen and (max-width: 768px) {
     .navbar-icone {
         margin-left : 1rem;

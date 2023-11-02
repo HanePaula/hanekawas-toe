@@ -20,6 +20,8 @@
     </header>
 
     <main>
+        <div class="overlay" id="overlay"></div>
+        <button class="jogar-novamente" id="jogar-novamente">PLAY AGAIN</button>
         <div class="tabuleiro">
             <div class="linha" id="linha1">
                 <div class="bloco" data-cheio=""></div>
@@ -49,7 +51,7 @@
                         <img class="jogador-mugshot" id="hanekawa-mugshot" src="assets/hanekawa-mugshot.png" alt="Perfil da Tsubasa Hanekawa">
                     </div>
 
-                    <p class="numero-vitorias">0</p>
+                    <p class="numero-vitorias" id="vitorias-1">0</p>
                 </div>
 
                 <div class="jogador">
@@ -59,7 +61,7 @@
                         <img class="jogador-mugshot" src="assets//black-hanekawa-mugshot.png" alt="Perfil da Black Hanekawa">
                     </div>
                     
-                    <p class="numero-vitorias">0</p>
+                    <p class="numero-vitorias" id="vitorias-2">0</p>
                 </div>
             </div>
         </div>
