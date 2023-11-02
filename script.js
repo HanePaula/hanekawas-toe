@@ -15,6 +15,7 @@ const somO = new Audio ('assets/OTone.mp3');
 
 botaoJogar.addEventListener('click', () => {
     musica.play();
+    musica.loop = true;
     botaoJogar.style.display = 'none';
     overlay.style.display = 'none';
     apresentacao.style.display = 'none';
